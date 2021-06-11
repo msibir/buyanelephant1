@@ -1,24 +1,10 @@
-from flask import Flask, request
-import logging
 import telebot
 
-import json
+bot = telebot.TeleBot('1732392723:AAFe2wPwgcX1v1585Gw8zJH4MH3CW4RBjaw')
 
-
-app = Flask(__name__)
-
-logging.basicConfig(level=logging.INFO)
-
-sessionStorage = {}
-
-
-@app.route('/post', methods=['POST'])
-def main():
-    bot = telebot.TeleBot('1732392723:AAFe2wPwgcX1v1585Gw8zJH4MH3CW4RBjaw')
-    group_id = -1001311790860
-    person_id = 1743731141
-    delete_last = True
-    bot.polling(none_stop=True, interval=0)
+group_id = -1001311790860
+person_id = 1743731141
+delete_last = True
 
 
 @bot.message_handler(content_types=['audio'])
@@ -29,5 +15,4 @@ def get_text_messages(message):
             bot.delete_message(person_id, message.message_id)
 
 
-if __name__ == '__main__':
-    app.run()
+bot.polling(none_stop=True, interval=0)
